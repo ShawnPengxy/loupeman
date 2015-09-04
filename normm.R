@@ -1,6 +1,6 @@
 shapefun<-function(sshape){###################每次都要检查shape项#########################
   sshape<-sub("\\b[Oo](\\w*[Ll]|[Mm]?[Bb])\\b|\\b[Oo][Vv]\\w*","椭",sshape)
-  sshape<-sub("\\b[Rr](\\w*[Dd]|[Mm]?[Bb][Cc]?)\\b|\\bRO\\w*|\\b[Bb][Rr]\\w*","圆形",sshape)
+  sshape<-sub("\\b[Rr](\\w*[Dd]|[Mm]?[Bb][Cc]?)\\b|\\bRO\\w*","圆形",sshape)
   sshape<-sub("\\b[Cc](\\w*[Nn]|[Mm]?[Bb])\\b|\\bCU\\w*|\\b[Cc][Uu]?[Ss]?[Hh]\\w*","垫形",sshape)
   sshape<-sub("\\b[Pp]\\w*[Ss]\\b|\\bPR\\w*|\\b[Pp][Cc]\\b|\\b[Pp][Nn]\\b","公主方",sshape)
   sshape<-sub("\\b[Mm](\\w*[Ee]|[Mm]?[Bb])\\b|\\bMA\\w*|\\b[Cc][Mm]\\b|\\b[Mm][Qq]\\b|^[Mm]$","马眼形",sshape)
@@ -98,14 +98,14 @@ cclarity<-sub(pattern = "\\b([Vv][Vv][Ss]\\s?1).*", replacement = "VVS1", cclari
 cclarity<-sub(pattern = "\\b([Vv][Vv][Ss]\\s?2).*", replacement = "VVS2", cclarity)
 cclarity<-sub(pattern = "\\b([Vv][Ss]\\s?1).*", replacement = "VS1", cclarity)
 cclarity<-sub(pattern = "\\b([Vv][Ss]\\s?2).*", replacement = "VS2", cclarity)
-cclarity<-sub(pattern = "\\b([Ss][Ii]\\s?1).*", replacement = "Si1", cclarity)
-cclarity<-sub(pattern = "\\b([Ss][Ii]\\s?2).*", replacement = "Si2", cclarity)
+cclarity<-sub(pattern = "\\b([Ss][Ii]\\s?1).*", replacement = "SI1", cclarity)
+cclarity<-sub(pattern = "\\b([Ss][Ii]\\s?2).*", replacement = "SI2", cclarity)
 #cclarity<-sub(pattern = "\\b([Ss][Ii]+).*", replacement = "SI2", cclarity)
 cclarity<-sub(pattern = "\\b([Ii]\\s?1).*", replacement = "I1", cclarity)
 cclarity<-sub(pattern = "\\b([Ii]\\s?2).*", replacement = "I2", cclarity)
 cclarity<-sub(pattern = "\\b([Ii]\\s?3).*", replacement = "I3", cclarity)
 #cclarity<-sub(pattern = "\\b([Ii]\\s?4).*", replacement = "I4", cclarity)
-temp_cla<-cclarity%in%c("FL","IF","VVS1","VVS2","VS1", "VS2","Si1","Si2","I1","I2","I3")
+temp_cla<-cclarity%in%c("FL","IF","VVS1","VVS2","VS1", "VS2","SI1","SI2","I1","I2","I3")
 cclarity[!temp_cla]<-NA
 newdata$clarity<-cclarity
 ############cut######################
@@ -115,18 +115,18 @@ ccut<-sub(pattern = ".*[Ee][Xx].*", replacement = "EX", ccut)
 ccut<-sub(pattern = ".*[Ff][Rr].*", replacement = "FR", ccut)
 ccut<-sub(pattern = "\\b[Gg][Dd]?.*", replacement = "GD", ccut)
 ccut<-sub(pattern = ".*[Vv][Gg].*", replacement = "VG", ccut)
-ccut<-sub(pattern = "\\b[Pp].*", replacement = "Pr", ccut)
-temp_cut<-ccut%in%c("EX","FR","GD","VG","Pr","")
+ccut<-sub(pattern = "\\b[Pp].*", replacement = "PR", ccut)
+temp_cut<-ccut%in%c("EX","FR","GD","VG","PR","")
 ccut[!temp_cut]<-NA
 newdata$cut<-ccut
 ###############ppolish###################
 ppolish<-newdata$polish
-ppolish<-sub(pattern = "\\b[Ee][Xx].*", replacement = "EX", ppolish)
+ppolish<-sub(pattern = "\\b3?[Ee][Xx].*", replacement = "EX", ppolish)
 ppolish<-sub(pattern = "\\b[Ff].*", replacement = "FR", ppolish)
 ppolish<-sub(pattern = "\\b[Gg].*", replacement = "GD", ppolish)
 ppolish<-sub(pattern = "\\b[Vv][Gg].*", replacement = "VG", ppolish)
-ppolish<-sub(pattern = "\\b[Pp].*", replacement = "Pr", ppolish)
-temp_pol<-ppolish%in%c("EX","FR","GD","VG","Pr")
+ppolish<-sub(pattern = "\\b[Pp].*", replacement = "PR", ppolish)
+temp_pol<-ppolish%in%c("EX","FR","GD","VG","PR")
 ppolish[!temp_pol]<-NA
 newdata$polish<-ppolish
 ###############symmetry###################
@@ -135,8 +135,8 @@ ssymmetry<-sub(pattern = "\\b[Ee][Xx].*", replacement = "EX", ssymmetry)
 ssymmetry<-sub(pattern = "\\b[Ff].*", replacement = "FR", ssymmetry)
 ssymmetry<-sub(pattern = "\\b[Gg][Dd]?.*", replacement = "GD", ssymmetry)
 ssymmetry<-sub(pattern = "\\b[Vv][Gg].*", replacement = "VG", ssymmetry)
-ssymmetry<-sub(pattern = "\\b[Pp].*", replacement = "Pr", ssymmetry)
-temp_symm<-ssymmetry%in%c("EX","FR","GD","VG","Pr")
+ssymmetry<-sub(pattern = "\\b[Pp].*", replacement = "PR", ssymmetry)
+temp_symm<-ssymmetry%in%c("EX","FR","GD","VG","PR")
 ssymmetry[!temp_symm]<-NA
 newdata$symmetry<-ssymmetry
 ###############fluorescence###################
@@ -193,7 +193,6 @@ ccolorr<-sub("^K\\W*$|^K\\s-\\s\\W*|^K[,.]\\w*","K11111",ccolorr)
 ccolorr<-sub("^L\\W*$|^L\\s(-\\s)?\\W*|^L[,.]\\w*|^L\\(\\w*","L11111",ccolorr)
 ccolorr<-sub("^M\\W*$|^M\\s(-\\s)?\\W*|^M[,.]\\w*|^M\\(\\w*","M11111",ccolorr)
 ccolorr<-sub("^N\\W*$|^N\\s(-\\s)?\\W*|^N[,.]\\w*","N11111",ccolorr)
-
 ccolorr<-sub("^O-?P\\W*$","O-P1111",ccolorr)########  "O-P"  #########
 ccolorr<-sub("^O\\W*$|^O\\s(-\\s)?\\W*","O11111",ccolorr)
 ccolorr<-sub("^P\\W*$","P11111",ccolorr)
@@ -243,44 +242,78 @@ coolor<-matchh_COL("U-V1111",coolor, 2)
 coolor<-matchh_COL("W-X1111",coolor, 2)
 coolor<-matchh_COL("X-Y1111",coolor, 2)
 coolor<-matchh_COL("Y-Z1111",coolor, 2)
-temp_color<-coolor%in%c("D","E","F","G","H","I","J","K","L","M","N","O","P","Q","S","U","W","X","Y","O-P","Q-R","S-T","U-V","W-X","X-Y","Y-Z")
+temp_colorr<-coolor%in%c("D","E","F","G","H","I","J","K","L","M","N","O","P","Q","S","U","W","X","Y","O-P","Q-R","S-T","U-V","W-X","X-Y","Y-Z")
 
   
 
 ############处理彩钻颜色####################
-Fancy_data<-newdata[!temp_color,]
-A<-coolor[!temp_color]
+############处理彩钻颜色####################
+Fancy_data<-newdata[!temp_colorr,]
+A<-coolor[!temp_colorr]
 B<-trimws(gsub("(UN)?EVEN|-?NOT APPLICABLE|NATURAL|\\[\\*\\]|,","",A,ignore.case=T))
 strength<-toupper(sub(pattern = ".*(None|Faint|Very light|Light|Fancy|Fancy Dark|Fancy Intense|Fancy Vivid|Fancy Deep).*", replacement = "\\1", B,ignore.case=T))
 qq<-regexpr(".*(None|Faint|Very light|Light|Fancy|Fancy Dark|Fancy Intense|Fancy Vivid|Fancy Deep).*", strength,ignore.case=T)
 strength[which(qq<0)]<-NA
 C<-trimws(gsub("None|Faint|Very light|Light|Fancy|Fancy Dark|Fancy Intense|Fancy Vivid|Fancy Deep","",B,ignore.case=T))
-hue<-toupper(sub(pattern = "(\\w+ish(\\s\\w+ish)?).*", replacement = "\\1",C, ignore.case=T))
-qq1<-regexpr("(\\w+ish(\\s\\w+ish)?).*", hue,ignore.case=T)
-hue[which(qq1<0)]<-""
-color<-trimws(gsub("(\\w+ish(\\s\\w+ish)?).","",C,ignore.case=T))
+
+
+m<-length(C)
+hue<-rep(NA,m)
+color<-rep(NA,m)
+for(i in 1:m){
+  splt<-unlist(strsplit(C[i],split="\\s|-"))
+  
+  index_splt<-sapply(splt,regexpr,pattern=".*ish",ignore.case=T)
+  temp_splt<-toupper(splt[which(index_splt>0)])
+  temp_color<-toupper(splt[which(index_splt<0)])
+  nn<-length(temp_splt)
+  if(nn==1) hue[i]<-temp_splt
+  if(nn==2) hue[i]<-paste(temp_splt[1],temp_splt[2], sep=" ")
+  if(nn==3) hue[i]<-paste(temp_splt[1],temp_splt[2],temp_splt[3], sep=" ")
+  if(nn==4) hue[i]<-paste(temp_splt[1],temp_splt[2],temp_splt[3],temp_splt[4], sep=" ")
+  if(nn==5) hue[i]<-paste(temp_splt[1],temp_splt[2],temp_splt[3],temp_splt[4],temp_splt[5], sep=" ")
+  nn<-length(temp_color)
+  if(nn==1) color[i]<-temp_color
+  if(nn==2) color[i]<-paste(temp_color[1],temp_color[2], sep=" ")
+  if(nn==3) color[i]<-paste(temp_color[1],temp_color[2],temp_color[3], sep=" ")
+  if(nn==4) color[i]<-paste(temp_color[1],temp_color[2],temp_color[3],temp_color[4], sep=" ")
+  if(nn==5) color[i]<-paste(temp_color[1],temp_color[2],temp_color[3],temp_color[4],temp_color[5], sep=" ")    
+}
+
+
+
+if(F) {
+  hue<-toupper(sub(pattern = "(\\w+ish(\\s\\w+ish)?).*", replacement = "\\1",C, ignore.case=T))
+  qq1<-regexpr("(\\w+ish(?:\\s\\w+ish)?).*", hue,ignore.case=T)
+  hue[which(qq1<0)]<-""
+  color<-trimws(gsub("(\\w+ish(\\s\\w+ish)?).","",C,ignore.case=T))
+}
+hue[is.na(hue)]<-""
 Fancy_data$color<-toupper(color)
 Fancy_data<-cbind(Fancy_data,strength,hue)
 Fancycolor_data<-subset(Fancy_data,is.na(strength)==F,select=shape:hue)
 ##################处理白钻颜色######################
-coolor[!temp_color]<-NA
-temp_minusN<-coolor%in%c("O","P","Q","S","U","W","X","Y","O-P","Q-R","S-T","U-V","W-X","X-Y","Y-Z")
-coolor[temp_minusN]<-"<N"
-newdata$color<-coolor
-newdata<-newdata[temp_color,]
+coolor[!temp_colorr]<-NA
 
+temp_minusN<-coolor%in%c("N","O","P","Q","S","U","W","X","Y","O-P","Q-R","S-T","U-V","W-X","X-Y","Y-Z")
+coolor[temp_minusN]<-NA
+newdata$color<-coolor
+#################
 
 
 
 
 
 ##########输出彩钻数据#############
+
+
+
 Fancycolor_data<-na.omit(Fancycolor_data)
 
 Fancycolor_data<-subset(Fancycolor_data,Fancycolor_data$price!=""&!is.na(Fancycolor_data$shape),select = shape:hue)
 
-write.csv(Fancycolor_data,file = "Fancycolor_Sheet_for_20150814_update.csv",row.names=F,fileEncoding="UTF-8") 
-write.csv(Fancycolor_data,file = "Fancycolor_Sheet_for_20150814.csv",row.names=F) 
+#write.csv(Fancycolor_data,file = "Fancycolor_Sheet_for_20150818_update.csv",row.names=F,fileEncoding="UTF-8") 
+#write.csv(Fancycolor_data,file = "Fancycolor_Sheet_for_20150818.csv",row.names=F) 
 
 
 ######################删除rapprice中小于10的异常值#################
@@ -292,14 +325,15 @@ newdata$back[which(newdata$back>=0)]<-NA
 
 TTT<-newdata[-19]#################删除price项目#############
 TTT<-na.omit(TTT)
+TTT$cut[which(TTT$shape!="圆形")]<-""##################把异形钻的切工项改为无切工
 TTT<-subset(TTT,TTT$rapprice!=""&TTT$back!="",select = shape:rapprice)
 #userid<-rep(687,length(TTT$shape))
 #location<-rep("国外",length(TTT$shape))
 
 #TTT_1<-cbind(location,TTT)
 #TTT<-cbind(userid,TTT_1)
-write.csv(TTT,file = "Final_Sheet_for_20150814_update.csv",row.names=F,fileEncoding="UTF-8") 
-write.csv(TTT,file = "Final_Sheet_for_20150814.csv",row.names=F) 
+#write.csv(TTT,file = "Final_Sheet_for_20150820_update.csv",row.names=F,fileEncoding="UTF-8") 
+#write.csv(TTT,file = "Final_Sheet_for_20150820.csv",row.names=F) 
 
 
 

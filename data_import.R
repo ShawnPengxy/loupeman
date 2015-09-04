@@ -19,8 +19,11 @@ setwd("D:/")
 `62919` <- read.csv("./CSV_revised_sheets/62919.csv", header=TRUE,stringsAsFactors=FALSE)
 `63050` <- read.csv("./CSV_revised_sheets/63050.csv", header=TRUE,stringsAsFactors=FALSE)
 `66444` <- read.csv("./CSV_revised_sheets/66444.csv", header=TRUE,stringsAsFactors=FALSE)
-`66920` <- read.csv("./CSV_revised_sheets/66920.csv", header=TRUE,stringsAsFactors=FALSE)
+#`66920` <- read.csv("./CSV_revised_sheets/66920.csv", header=TRUE,stringsAsFactors=FALSE)
+#`66658` <- read.csv("./CSV_revised_sheets/66658.csv", header=TRUE,stringsAsFactors=FALSE)
+`67016` <- read.csv("./CSV_revised_sheets/67016.csv", header=TRUE,stringsAsFactors=FALSE)
 `67155` <- read.csv("./CSV_revised_sheets/67155.csv", header=TRUE,stringsAsFactors=FALSE)
+
 
 `70696` <- read.csv("./CSV_revised_sheets/70696.csv", header=TRUE,stringsAsFactors=FALSE)
 `70958` <- read.csv("./CSV_revised_sheets/70958.csv", header=TRUE,stringsAsFactors=FALSE)
@@ -31,28 +34,36 @@ setwd("D:/")
 `71657` <- read.csv("./CSV_revised_sheets/71657.csv", header=TRUE,stringsAsFactors=FALSE)
 `73176` <- read.csv("./CSV_revised_sheets/73176.csv", header=TRUE,stringsAsFactors=FALSE)
 `73199` <- read.csv("./CSV_revised_sheets/73199.csv", header=TRUE,stringsAsFactors=FALSE)
-`73440` <- read.csv("./CSV_revised_sheets/73440.csv", header=TRUE,stringsAsFactors=FALSE)
-
-`74753a` <- read.csv("./CSV_revised_sheets/74753a.csv", header=TRUE,stringsAsFactors=FALSE)
-`74753f` <- read.csv("./CSV_revised_sheets/74753f.csv", header=TRUE,stringsAsFactors=FALSE)
+#`73440` <- read.csv("./CSV_revised_sheets/73440.csv", header=TRUE,stringsAsFactors=FALSE)
+`74753` <- read.csv("./CSV_revised_sheets/74753.csv", header=TRUE,stringsAsFactors=FALSE)
+#`74753f` <- read.csv("./CSV_revised_sheets/74753f.csv", header=TRUE,stringsAsFactors=FALSE)
 
 #`74511_84202` <- read.csv("./CSV_revised_sheets/74511_84202.csv", header=TRUE,stringsAsFactors=FALSE)
-`74795a` <- read.csv("./CSV_revised_sheets/74795a.csv", header=TRUE,stringsAsFactors=FALSE)
-`74795f` <- read.csv("./CSV_revised_sheets/74795f.csv", header=TRUE,stringsAsFactors=FALSE)
+
+#`74795f` <- read.csv("./CSV_revised_sheets/74795f.csv", header=TRUE,stringsAsFactors=FALSE)
 `75583` <- read.csv("./CSV_revised_sheets/75583.csv", header=TRUE,stringsAsFactors=FALSE)
+#`78634` <- read.csv("./CSV_revised_sheets/78634.csv", header=TRUE,stringsAsFactors=FALSE)
 `78738` <- read.csv("./CSV_revised_sheets/78738.csv", header=TRUE,stringsAsFactors=FALSE)
 
-#`77712` <- read.csv("./CSV_revised_sheets/77712.csv", header=TRUE,stringsAsFactors=FALSE)
 
 `80546` <- read.csv("./CSV_revised_sheets/80546.csv", header=TRUE,stringsAsFactors=FALSE)
 `81517` <- read.csv("./CSV_revised_sheets/81517.csv", header=TRUE,stringsAsFactors=FALSE)
-`83357` <- read.csv("./CSV_revised_sheets/83357.csv", header=TRUE,stringsAsFactors=FALSE)
-`88933` <- read.csv("./CSV_revised_sheets/88933.csv", header=TRUE,stringsAsFactors=FALSE)
+#`83357hk` <- read.csv("./CSV_revised_sheets/83357hk.csv", header=TRUE,stringsAsFactors=FALSE)
+#`83357india` <- read.csv("./CSV_revised_sheets/83357india.csv", header=TRUE,stringsAsFactors=FALSE)
+#`85412` <- read.csv("./CSV_revised_sheets/85412.csv", header=TRUE,stringsAsFactors=FALSE)
+#`88933` <- read.csv("./CSV_revised_sheets/88933.csv", header=TRUE,stringsAsFactors=FALSE)
 
-`95849` <- read.csv("./CSV_revised_sheets/95849.csv", header=TRUE,stringsAsFactors=FALSE)
+`90062` <- read.csv("./CSV_revised_sheets/90062.csv", header=TRUE,stringsAsFactors=FALSE)
+#`94654` <- read.csv("./CSV_revised_sheets/94654.csv", header=TRUE,stringsAsFactors=FALSE)
+#`95849` <- read.csv("./CSV_revised_sheets/95849.csv", header=TRUE,stringsAsFactors=FALSE)
 `98722` <- read.csv("./CSV_revised_sheets/98722.csv", header=TRUE,stringsAsFactors=FALSE)
 
+############香港现货##############
+`32952hk` <- read.csv("./CSV_revised_sheets/32952hk.csv", header=TRUE,stringsAsFactors=FALSE)
+#`32952hkup2` <- read.csv("./CSV_revised_sheets/32952hkup2.csv", header=TRUE,stringsAsFactors=FALSE)
+
+
 ############彩钻供应商##################
-`66920` <- read.csv("./CSV_revised_sheets/66920.csv", header=TRUE,stringsAsFactors=FALSE)
-`88933` <- read.csv("./CSV_revised_sheets/88933.csv", header=TRUE,stringsAsFactors=FALSE)
-`90062` <- read.csv("./CSV_revised_sheets/90062.csv", header=TRUE,stringsAsFactors=FALSE)
+#`66920` <- read.csv("./CSV_revised_sheets/66920.csv", header=TRUE,stringsAsFactors=FALSE)
+#`88933` <- read.csv("./CSV_revised_sheets/88933.csv", header=TRUE,stringsAsFactors=FALSE)
+#`90062` <- read.csv("./CSV_revised_sheets/90062.csv", header=TRUE,stringsAsFactors=FALSE)
