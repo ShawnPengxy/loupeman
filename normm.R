@@ -169,7 +169,7 @@ newdata$stoneid<-sub(pattern = ".*[日月].*", replacement = NA, newdata$stoneid)
 ######################删除milky中的L1和L2项############
 newdata$milky[newdata$milky%in%c("L1","L2")]<-"无奶"
 ######################删除carat中小于0.3的异常值#################
-newdata$carat[which(newdata$carat<0.3)]<-NA
+#newdata$carat[which(newdata$carat<0.3)]<-NA
 ##################删除散货#########################
 newdata$report[which(newdata$report=="散货")]<-NA
 ################去除价格中逗号分割################

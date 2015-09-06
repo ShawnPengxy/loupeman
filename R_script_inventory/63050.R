@@ -1,8 +1,8 @@
 setwd("D:/")
 library(reshape)
 importdata<-`63050`
-importdata<-rename(importdata,c(Measurement="measurement",Shape="shape",Carat="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Flo="fluorescence",Cert="report",Cert.No="reportno",StoneID="stoneid", Off..="back"
-,O.Rap....Ct="rapprice",Rate...Ct="price"))
+importdata<-rename(importdata,c(Brown.Inc="Brown.Inc",Lust="Lust",Measurement="measurement",Shape="shape",Carat="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Flo="fluorescence",Cert="report",Cert.No="reportno",Stone.ID="stoneid", Off..="back",Org.Rate="rapprice",Rate...CT="price"))
+#importdata<-rename(importdata,c(Lust="Lust",Measurement="measurement",Shape="shape",Carat="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Flo="fluorescence",Cert="report",Cert.No="reportno",StoneID="stoneid", Off..="back",Org.Rate="rapprice",Rate...CT="price"))
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 
 colsh<-rep(NA, length(importdata$measurement))
@@ -14,17 +14,21 @@ temp1<-importdata$Lust%in%c("ML1","ML2","ML3")
 milky[temp1]<-"带奶"
 milky[!temp1]<-"无奶"
 
-temp2<-importdata$Brown.Inc%in%c("BT","LB")
-colsh[temp2]<-"带咖"
-green[temp2]<-"无绿"
+#if(F){
+  temp2<-importdata$Brown.Inc%in%c("BT","LB","MT","PT")
+  colsh[temp2]<-"带咖"
+  green[temp2]<-"无绿"
+  
+  temp3<-importdata$Brown.Inc%in%"GT"
+  colsh[temp3]<-"无咖"
+  green[temp3]<-"带绿"
+  
+  temp4<-importdata$Brown.Inc%in%"N"
+  colsh[temp4]<-"无咖"
+  green[temp4]<-"无绿"
+#}
+  
 
-temp3<-importdata$Brown.Inc%in%"GT"
-colsh[temp3]<-"无咖"
-green[temp3]<-"带绿"
-
-temp4<-importdata$Brown.Inc%in%"N"
-colsh[temp4]<-"无咖"
-green[temp4]<-"无绿"
 
 
 OPut<-cbind(rapnetid, colsh)

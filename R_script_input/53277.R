@@ -1,7 +1,7 @@
 library(reshape)
 importdata<-`53277` #导入变量名转换
-#importdata<-rename(importdata, c(L.W.Diam="measurement",Shape="shape",Cts="carat", Color="color",Clar="clarity",Cut="cut", Polish="polish", Symm="symmetry", Fl="fluorescence",Lab="report", Cert.No="reportno", Hopno="stoneid", Disc.="back", Rap.="rapprice"))
-importdata<-rename(importdata, c(Measurement="measurement",Shape="shape",WT="carat", Color="color",Clarity="clarity",Cut="cut", Polish="polish", Symm="symmetry", FLRInt="fluorescence",Lab="report", Cert.No.="reportno", StoneNo="stoneid", Disc..="back", Rap..="rapprice"))
+#importdata<-rename(importdata, c(Tinge="Tinge",L.W.Diam="measurement",Shape="shape",Cts="carat", Color="color",Clar="clarity",Cut="cut", Polish="polish", Symm="symmetry", Fl="fluorescence",Lab="report", Cert.No="reportno", Hopno="stoneid", Disc.="back", Rap.="rapprice"))
+importdata<-rename(importdata, c(Tinge="Tinge",Measurement="measurement",Shape="shape",WT="carat", Color="color",Clarity="clarity",Cut="cut", Polish="polish", Symm="symmetry", FLS="fluorescence",Lab="report", Cert.No.="reportno", StoneNo="stoneid", Disc..="back", Rap..="rapprice"))
 #importdata$price<-as.numeric(importdata$carat)*as.numeric(importdata$price)
 
 
@@ -39,8 +39,8 @@ colsh[milk3]<-"无咖"
 green[milk3]<-"无绿"
 
   #############添加彩钻###############
-  index1<-importdata$color%in%c("",NA)
-  importdata$color[index1]<-importdata$Fancy.Color[index1]
+ # index1<-importdata$color%in%c("",NA)
+#  importdata$color[index1]<-importdata$Fancy.Color[index1]
 
 
 
@@ -53,6 +53,8 @@ OOPut<-cbind(OPut, importdata)
 
 
 
-Myvars<-c("shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
+Myvars<-c("Tinge","shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
 Fin<-OOPut[Myvars]
+index_Fin<-Myvars%in%c("Tinge")
+Fin<-Fin[!index_Fin]
 write.csv(Fin,file="./R_input/53277.csv",row.names = F)

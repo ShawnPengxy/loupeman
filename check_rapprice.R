@@ -4,6 +4,12 @@ nonround_rapprice<-read.csv("./异形钻价格匹配表.csv",header=T,stringsAsFactors =
 unchecked_data<-TTT[names(TTT)%in%c("shape","carat","color","clarity","rapprice","rapnetid")]
 
 weight_interval<-rep(NA,length(TTT[,1]))
+weight_interval[which(TTT$carat<=0.03&TTT$carat>=0.01)]<-"0.01-0.03"
+weight_interval[which(TTT$carat<=0.07&TTT$carat>=0.04)]<-"0.04-0.07"
+weight_interval[which(TTT$carat<=0.14&TTT$carat>=0.08)]<-"0.08-0.14"
+weight_interval[which(TTT$carat<=0.17&TTT$carat>=0.15)]<-"0.15-0.17"
+weight_interval[which(TTT$carat<=0.22&TTT$carat>=0.18)]<-"0.18-0.22"
+weight_interval[which(TTT$carat<=0.29&TTT$carat>=0.23)]<-"0.23-0.29"
 weight_interval[which(TTT$carat<=0.39&TTT$carat>=0.30)]<-"0.30-0.39"
 weight_interval[which(TTT$carat<=0.49&TTT$carat>=0.40)]<-"0.40-0.49"
 weight_interval[which(TTT$carat<=0.69&TTT$carat>=0.50)]<-"0.50-0.69"

@@ -1,7 +1,9 @@
 setwd("D:/")
 library(reshape)
 importdata<-`71344`
-importdata<-rename(importdata,c(SHP="shape",CTS="carat", COL="color", CLA="clarity", CUT="cut", POL="polish",SYM="symmetry",FL="fluorescence",CERTNO.="reportno",REFNO.="stoneid", DIS="back",RAP="rapprice"))
+importdata<-rename(importdata,c(COM="COM",SHP="shape",CTS="carat", COL="color", CLA="clarity", CUT="cut", POL="polish",SYM="symmetry",FL="fluorescence",CERTNO.="reportno",REFNO.="stoneid", DIS="back",Rap="rapprice"))
+#importdata<-rename(importdata,c(COM="COM",SHP="shape",CTS="carat", COL="color", CLA="clarity", CUT="cut", POL="polish",SYM="symmetry",FL="fluorescence",CERTNO.="reportno",REFNO.="stoneid", Dis="back",rap="rapprice"))
+
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 measurement<-unlist(paste(importdata$Measurement,importdata$X,importdata$X.1,sep="*"))
 colsh<-rep(NA, length(importdata$color))
@@ -35,6 +37,8 @@ OPut<-cbind(OPut, measurement)
 OPut<-cbind(OPut, price)
 
 OOPut<-cbind(OPut, importdata)
-Myvars<-c("shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
+Myvars<-c("COM","shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
 Fin<-OOPut[Myvars]
+index_Fin<-Myvars%in%c("COM")
+Fin<-Fin[!index_Fin]
 write.csv(Fin,file="./R_input/71344.csv",row.names = F)

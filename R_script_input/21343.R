@@ -1,6 +1,6 @@
 library(reshape)
 importdata<-`21343` #导入变量名转换
-importdata<-rename(importdata,c(Shape="shape",Carat="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Fluor="fluorescence",Certificate="report",Certificate.Number="reportno",UID.NO="stoneid", X..Below="back",Rap="rapprice",Rate...ct.="price"))
+importdata<-rename(importdata,c(Milky="Milky",Shade="Shade",Shape="shape",Carat="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Fluor="fluorescence",Certificate="report",Certificate.Number="reportno",UID.NO="stoneid", X..Below="back",Rap="rapprice",Rate...ct.="price"))
 #缺成色三项
 importdata$shape[which(importdata$shape=="BR")]<-"圆形"
 #处理measurement
@@ -40,6 +40,8 @@ OPut<-cbind(OPut, colsh)
 OPut<-cbind(OPut, milky)
 OPut<-cbind(OPut, green)
 OOPut<-cbind(OPut, importdata)
-Myvars<-c("shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
+Myvars<-c("shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price","Milky","Shade")
 Fin<-OOPut[Myvars]
+index_Fin<-Myvars%in%c("Milky","Shade")
+Fin<-Fin[!index_Fin]
 write.csv(Fin,file="./R_input/21343.csv",row.names = F)

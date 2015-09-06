@@ -1,6 +1,6 @@
 library(reshape)
 importdata<-`48394` #导入变量名转换
-importdata<-rename(importdata, c(Measurement="measurement",Shape="shape",Carats="carat", Color="color",Clarity="clarity",Cut="cut", Polish="polish", Symm="symmetry", Fluo.Int="fluorescence",Lab="report", Certificate="reportno", Stone.ID="stoneid", Disc...="back", Rap..="rapprice",Amount.US.="price"))
+importdata<-rename(importdata, c(Tinge="Tinge",Milky="Milky",Measurement="measurement",Shape="shape",Carats="carat", Color="color",Clarity="clarity",Cut="cut", Polish="polish", Symm="symmetry", Fluo.Int="fluorescence",Lab="report", Certificate="reportno", Stone.ID="stoneid", Disc..="back", Rap..="rapprice",Amount.U.="price"))
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 
 rapnetid<-as.numeric(rep("48394", length(importdata$measurement)))
@@ -29,6 +29,8 @@ OOPut<-cbind(OPut, importdata)
 
 
 
-Myvars<-c("shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
+Myvars<-c("Milky","Tinge","shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
 Fin<-OOPut[Myvars]
+index_Fin<-Myvars%in%c("Milky","Tinge")
+Fin<-Fin[!index_Fin]
 write.csv(Fin,file="./R_input/48394.csv",row.names = F)

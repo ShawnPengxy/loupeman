@@ -1,6 +1,6 @@
 library(reshape)
 importdata<-`47821` #导入变量名转换
-importdata<-rename(importdata, c(Shape="shape",Carats="carat", Color="color",Clarity="clarity",Cut="cut", Polish="polish", Sym="symmetry", Flrcnt="fluorescence",Lab="report", ReportNo.="reportno", Packet.Id.="stoneid", Back.="back", Rap="rapprice",Price.Cts.="price"))
+importdata<-rename(importdata, c(Shade="Shade",Milky="Milky",Shape="shape",Carats="carat", Color="color",Clarity="clarity",Cut="cut", Polish="polish", Sym="symmetry", Flrcnt="fluorescence",Lab="report", ReportNo.="reportno", Packet.Id.="stoneid", Back.="back", Rap="rapprice",Price.Cts.="price"))
 
 options(digits=10)
 
@@ -19,10 +19,10 @@ milk2<-importdata$Milky%in%c("HEAVY","LIGHT","MEDIUM")
 milky[milk2]<-"带奶"
 
 ##################Shade#############
-temp1<-importdata$Shade%in%c("FBR")
+temp1<-importdata$Shade%in%c("FBR","MXD","PINK")
 colsh[temp1]<-"带咖"
 green[temp1]<-"无绿"
-temp2<-importdata$Shade%in%""
+temp2<-importdata$Shade%in%c("","WHITE")
 colsh[temp2]<-"无咖"
 green[temp2]<-"无绿"
 
@@ -34,6 +34,8 @@ OOPut<-cbind(OPut, importdata)
 
 
 
-Myvars<-c("shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
+Myvars<-c("Milky","Shade","shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
 Fin<-OOPut[Myvars]
+index_Fin<-Myvars%in%c("Milky","Shade")
+Fin<-Fin[!index_Fin]
 write.csv(Fin,file="./R_input/47821.csv",row.names = F)

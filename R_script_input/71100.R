@@ -1,6 +1,6 @@
 library(reshape)
 importdata<-`71100` #导入变量名转换
-importdata<-rename(importdata, c(Shape="shape",Carat="carat", Col="color",Clarit="clarity",Cut="cut", Pol="polish", Sym="symmetry", Flo="fluorescence",Cert="report", Report.No="reportno", Stone.ID="stoneid", Disc.="back", RapRat="rapprice"))
+importdata<-rename(importdata, c(Shade="Shade",Shape="shape",Carat="carat", Col="color",Clarit="clarity",Cut="cut", Pol="polish", Sym="symmetry", Flo="fluorescence",Cert="report", Report.No="reportno", Stone.ID="stoneid", Disc.="back", RapRat="rapprice"))
 
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 
@@ -29,6 +29,18 @@ zongse2<-regexpr("NO BROWN , NO GREEN , NO MILKY", ziduan)
 lvse2<-regexpr("NO BROWN , NO GREEN , NO MILKY", ziduan)
 naise2<-regexpr("NO BROWN , NO GREEN , NO MILKY", ziduan)
 for(i in 1:last_number) {if(zongse2[i]>0) colsh[i]<-"无咖";if(lvse2[i]>0) green[i]<-"无绿";if(naise2[i]>0) milky[i]<-"无奶"}
+index1<-importdata$Shade%in%"MIXED TINGE"
+colsh[index1]<-"带咖"
+milky[index1]<-"无奶"
+green[index1]<-"无绿"
+index1<-importdata$Shade%in%""
+colsh[index1]<-"无咖"
+milky[index1]<-"无奶"
+green[index1]<-"无绿"
+
+milky[which(is.na(milky)&!is.na(colsh)|!is.na(green))]<-"无奶"
+colsh[which(is.na(colsh)&!is.na(milky)|!is.na(green))]<-"无咖"
+green[which(is.na(green)&!is.na(colsh)|!is.na(milky))]<-"无绿"
 
 OPut<-cbind(measurement,rapnetid)
 OPut<-cbind(OPut, colsh)
@@ -40,6 +52,8 @@ OOPut<-cbind(OPut, importdata)
 
 
 
-Myvars<-c("shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
+Myvars<-c("Shade","shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
 Fin<-OOPut[Myvars]
+index_Fin<-Myvars%in%c("Shade")
+Fin<-Fin[!index_Fin]
 write.csv(Fin,file="./R_input/71100.csv",row.names = F)

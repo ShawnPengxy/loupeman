@@ -1,6 +1,6 @@
 library(reshape)
 importdata<-`73176` #导入变量名转换
-importdata<-rename(importdata, c(Shape="shape",Carat="carat", Co="color",Clar="clarity",Cut="cut", Pol="polish", Sym="symmetry", Flo="fluorescence",Cer="report", Report.No.="reportno", StoneID="stoneid",Disc..="back",RapRate="rapprice"))
+importdata<-rename(importdata, c(Member.Comment="Member.Comment",Shape="shape",Carat="carat", Co="color",Clar="clarity",Cut="cut", Pol="polish", Sym="symmetry", Flo="fluorescence",Cer="report", Report.No.="reportno", StoneID="stoneid",Disc..="back",RapRate="rapprice"))
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 
 
@@ -31,6 +31,8 @@ OOPut<-cbind(OPut, importdata)
 
 
 
-Myvars<-c("shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
+Myvars<-c("Member.Comment","shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
 Fin<-OOPut[Myvars]
+index_Fin<-Myvars%in%c("Member.Comment")
+Fin<-Fin[!index_Fin]
 write.csv(Fin,file="./R_input/73176.csv",row.names = F)

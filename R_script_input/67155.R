@@ -1,8 +1,8 @@
 setwd("D:/")
 library(reshape)
 importdata<-`67155`
-#importdata<-rename(importdata,c(Shape="shape",Carats="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Fluor="fluorescence",CERT="report",Certificate.No="reportno",STKID="stoneid", RapDis="back",RapRate="rapprice",Price.Per.Crt="price"))
-importdata<-rename(importdata,c(Measurements="measurement",Shape="shape",Carats="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Fluor="fluorescence",Cert="report",Certificate.No="reportno",Packet.Id="stoneid", Rap.Dis="back",Rap.Rte="rapprice",X..Ct="price"))
+#importdata<-rename(importdata,c(Milky="Milky",Brown="Brown",Tint="Tint¡±,Shape="shape",Carats="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Fluor="fluorescence",CERT="report",Certificate.No="reportno",STKID="stoneid", RapDis="back",RapRate="rapprice",Price.Per.Crt="price"))
+importdata<-rename(importdata,c(Tinge="Tinge",Lustre="Luster",Measurements="measurement",Shape="shape",Carats="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Fluor="fluorescence",Cert="report",Certificate.No="reportno",Packet.Id="stoneid", Rap.Dis="back",Rap.Rte="rapprice",X..Ct="price"))
 
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 #Dia<-c(unlist(paste(importdata$MinDia,importdata$MinDia, sep="-")))
@@ -50,6 +50,17 @@ OPut<-cbind(OPut, green)
 OPut<-cbind(OPut, measurement)
 
 OOPut<-cbind(OPut, importdata)
-Myvars<-c("shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
+
+if(F){
+  Myvars<-c("Milky","Brown","Tint","shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
+  Fin<-OOPut[Myvars]
+  index_Fin<-Myvars%in%c("Milky","Brown","Tint")
+  Fin<-Fin[!index_Fin]
+}
+
+Myvars<-c("Tinge","Luster","shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
 Fin<-OOPut[Myvars]
+index_Fin<-Myvars%in%c("Tinge","Luster")
+Fin<-Fin[!index_Fin]
+
 write.csv(Fin,file="./R_input/67155.csv",row.names = F)

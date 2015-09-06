@@ -1,7 +1,7 @@
 setwd("D:/")
 library(reshape)
 importdata<-`90062` #导入变量名转换
-importdata<-rename(importdata, c(Shape="shape",Carat="carat", Col="color",Clarity="clarity",Cut="cut", Pol="polish", Sym.="symmetry", Flo="fluorescence",Cert="report", Report.No="reportno", Disc..="back",RapRate="rapprice",Stone.ID="stoneid",Total.Amount..="price"))
+importdata<-rename(importdata, c(Shd="Shd",Milky="Milky",Shape="shape",Carat="carat", Col="color",Clarity="clarity",Cut="cut", Pol="polish", Sym.="symmetry", Flo="fluorescence",Cert="report", Report.No="reportno", Disc..="back",RapRate="rapprice",Stone.ID="stoneid",Total.Amount..="price"))
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 measurement<-unlist(paste(importdata$Mesurement,importdata$X,importdata$X.1,sep = "*"))
 #importdata$price<-as.numeric(importdata$price)*as.numeric(importdata$carat)
@@ -35,6 +35,9 @@ OOPut<-cbind(OPut, importdata)
 
 
 
-Myvars<-c("shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
+Myvars<-c("Milky","Shd","shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
 Fin<-OOPut[Myvars]
+index_Fin<-Myvars%in%c("Milky","Shd")
+Fin<-Fin[!index_Fin]
+
 write.csv(Fin,file="./R_input/90062.csv",row.names = F)
