@@ -1,7 +1,7 @@
-setwd("D:/")
 round_rapprice<- read.csv("./圆钻价格匹配表.csv", header=TRUE,stringsAsFactors=FALSE)
 nonround_rapprice<-read.csv("./异形钻价格匹配表.csv",header=T,stringsAsFactors = F)
 unchecked_data<-TTT[names(TTT)%in%c("shape","carat","color","clarity","rapprice","rapnetid")]
+
 
 weight_interval<-rep(NA,length(TTT[,1]))
 weight_interval[which(TTT$carat<=0.03&TTT$carat>=0.01)]<-"0.01-0.03"

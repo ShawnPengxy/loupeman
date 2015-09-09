@@ -1,7 +1,7 @@
 library(reshape)
 importdata<-`98722` #导入变量名转换
 #importdata<-rename(importdata, c(Cert.comment="Cert.comment",Measurements="measurement",Shape="shape",Weight="carat", Color="color",Clarity="clarity",Cut.Grade="cut", Polish="polish", Symmetry="symmetry", Fluorescence.Intensity="fluorescence",Lab="report", Certificate..="reportno", Stock..="stoneid", Rapnet.Discount.="back", Rap.Price="rapprice",Cash.price="price"))
-importdata<-rename(importdata, c(Cert.comment="Cert.comment",Measurements="measurement",Shape="shape",Weight="carat", Color="color",Clarity="clarity",Cut.Grade="cut", Polish="polish", Symmetry="symmetry", Fluorescence.Intensity="fluorescence",Lab="report", Certificate..="reportno", Stock..="stoneid", Rapnet.Discount.="back", Rap.Price="rapprice",Cash.price="price"))
+importdata<-rename(importdata, c(Cert.comment="Cert.comment",Measurements="measurement",Shape="shape",Weight="carat", Color="color",Clarity="clarity",Cut.Grade="cut", Polish="polish", Symmetry="symmetry", Fluorescence.Intensity="fluorescence",Lab="report", Certificate..="reportno", Stock..="stoneid", Rapnet.Discount.="back", RapNet.Price="rapprice",Cash.price="price"))
 importdata$rapprice=gsub(",","",importdata$rapprice)
 importdata$price=gsub(",","",importdata$price)
 

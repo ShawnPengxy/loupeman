@@ -8,9 +8,9 @@ shapefun<-function(sshape){###################每次都要检查shape项###############
   sshape<-sub("\\b[Ee](\\w*[Dd]|[Mm]?[Bb])\\b|\\bEM\\w*|\\b(S|SQ)?EM?\\b|^[Ee]$","祖母绿",sshape)
   sshape<-sub("\\b[Pp]\\w*[Rr]\\b|\\bPE\\w*|\\b[Pp][Ee]\\b","梨形",sshape)
   sshape<-sub("\\b[Rr]\\w*[Tt]\\b|\\bRA\\w*|\\b[Rr][Nn]\\w*","雷迪恩",sshape)
-  #  sshape<-sub("\\b[Tt]\\w*[Rr]\\b|\\bT[Rr]\\w*|\\bMTB\\b|\\bMTR\\b","三角形",sshape)
-  #  sshape<-sub("\\b[Ss][Qq]\\w*","方形",sshape)
-  #  sshape<-sub("\\b[Aa][Ss]\\w*","上丁",sshape)
+  sshape<-sub("\\bTR.*","三角形",sshape,ignore.case=T)
+  sshape<-sub("\\bSQ?R?.*","方形",sshape,ignore.case=T)
+  sshape<-sub("\\bASH?.*","上丁",sshape,ignore.case=T)
   
   return(sshape)
 }
@@ -54,6 +54,7 @@ importdata$reportno[temp_repno]<-""
 ###################处理price空白值################
 temp_repno<-importdata$price%in%NA
 importdata$price[temp_repno]<-""
+
 ############rapprice和back先不设置为NA########
 importdata$rapprice[is.na(importdata$rapprice)]<-""
 importdata$back[is.na(importdata$back)]<-""
@@ -79,16 +80,16 @@ Shhapee<-matchh("心形",Shhapee, 1)
 Shhapee<-matchh("祖母绿",Shhapee, 2)
 Shhapee<-matchh("梨形",Shhapee, 1)
 Shhapee<-matchh("雷迪恩",Shhapee, 2)
-#Shhapee<-matchh("三角形",Shhapee, 2)
-#Shhapee<-matchh("方形",Shhapee, 1)
-#Shhapee<-matchh("上丁",Shhapee, 3)
-temp<-Shhapee%in%c("圆形","垫形","公主方","马眼形","心形","祖母绿","梨形","椭","雷迪恩")
-Shhapee[!temp]<-NA
+Shhapee<-matchh("三角形",Shhapee, 2)
+Shhapee<-matchh("方形",Shhapee, 1)
+Shhapee<-matchh("上丁",Shhapee, 3)
+temp<-Shhapee%in%c("圆形","垫形","公主方","马眼形","心形","祖母绿","梨形","椭","雷迪恩","三角形","方形","上丁")
+#Shhapee[!temp]<-NA
 ########字段还原#######
 temp_1<-Shhapee%in%"椭"
 Shhapee[temp_1]<-"椭圆形"
-#temp_2<-Shhapee%in%"上丁"
-#Shhapee[temp_2]<-"上丁方形"
+temp_2<-Shhapee%in%"上丁"
+Shhapee[temp_2]<-"上丁方形"
 newdata$shape<-Shhapee
 ############clarity######################
 cclarity<-newdata$clarity
@@ -165,7 +166,7 @@ rreport[!temp_rep]<-"散货"
 newdata$report<-rreport
 
 ##################删除stoneid中的中文字“日”和“月"##############
-newdata$stoneid<-sub(pattern = ".*[日月].*", replacement = NA, newdata$stoneid)
+newdata$stoneid<-gsub(pattern = ".*[日月/].*", replacement = NA, newdata$stoneid)
 ######################删除milky中的L1和L2项############
 newdata$milky[newdata$milky%in%c("L1","L2")]<-"无奶"
 ######################删除carat中小于0.3的异常值#################
@@ -322,7 +323,8 @@ newdata$rapprice[which(newdata$rapprice<10)]<-NA
 newdata$back[which(newdata$back>=0)]<-NA
 
 ##########输出白钻数据###########
-
+##################删除stoneid中的中文字“日”和“月"##############
+newdata$stoneid<-gsub(pattern = ".*[日月/].*", replacement = NA, newdata$stoneid)
 TTT<-newdata[-19]#################删除price项目#############
 TTT<-na.omit(TTT)
 TTT$cut[which(TTT$shape!="圆形")]<-""##################把异形钻的切工项改为无切工
@@ -334,7 +336,7 @@ TTT<-subset(TTT,TTT$rapprice!=""&TTT$back!="",select = shape:rapprice)
 #TTT<-cbind(userid,TTT_1)
 #write.csv(TTT,file = "Final_Sheet_for_20150820_update.csv",row.names=F,fileEncoding="UTF-8") 
 #write.csv(TTT,file = "Final_Sheet_for_20150820.csv",row.names=F) 
-
+#TTT<-read.csv("D:/Final_Sheet_for_20150820.csv",header=T,stringsAsFactors=F)
 
 
 

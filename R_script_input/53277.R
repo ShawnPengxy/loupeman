@@ -1,7 +1,7 @@
 library(reshape)
 importdata<-`53277` #导入变量名转换
 #importdata<-rename(importdata, c(Tinge="Tinge",L.W.Diam="measurement",Shape="shape",Cts="carat", Color="color",Clar="clarity",Cut="cut", Polish="polish", Symm="symmetry", Fl="fluorescence",Lab="report", Cert.No="reportno", Hopno="stoneid", Disc.="back", Rap.="rapprice"))
-importdata<-rename(importdata, c(Tinge="Tinge",Measurement="measurement",Shape="shape",WT="carat", Color="color",Clarity="clarity",Cut="cut", Polish="polish", Symm="symmetry", FLS="fluorescence",Lab="report", Cert.No.="reportno", StoneNo="stoneid", Disc..="back", Rap..="rapprice"))
+importdata<-rename(importdata, c(Tinge="Tinge",Measurement="measurement",Shape="shape",WT="carat", Color="color",Clarity="clarity",Cut="cut", Polish="polish", Symm="symmetry", FLRInt="fluorescence",Lab="report", Cert.No.="reportno", StoneNo="stoneid", Disc..="back", Rap..="rapprice"))
 #importdata$price<-as.numeric(importdata$carat)*as.numeric(importdata$price)
 
 

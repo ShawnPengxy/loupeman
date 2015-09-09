@@ -1,6 +1,6 @@
 library(reshape)
 importdata<-`32952hk` #导入变量名转换
-importdata<-rename(importdata, c(Measurements="measurement",Shape="shape",Weight="carat", Color="color",Clarity="clarity",Cut.Grade="cut", Polish="polish", Symmetry="symmetry", Fluorescence.Intensity="fluorescence",Lab="report", Certificate..="reportno", Stock..="stoneid", Rapnet..Discount..="back", Rap.Price="rapprice",Per.carat="price"))
+importdata<-rename(importdata, c(Measurements="measurement",Shape="shape",Weight="carat", Color="color",Clarity="clarity",Cut.Grade="cut", Polish="polish", Symmetry="symmetry", FLO="fluorescence",Lab="report", Certificate..="reportno", Stock..="stoneid", Rapnet..Discount..="back", Rap.Price="rapprice",Per.carat="price"))
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 
 

@@ -1,9 +1,9 @@
 setwd("D:/")
 library(reshape)
 importdata<-`43460`
-#importdata<-rename(importdata,c(Milky="Milky",Brownish="Brownish",Measurement="measurement",Shape="shape",Weight="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Flu="fluorescence",Lab="report",Cert.No="reportno",Item.No="stoneid", Dis...="back",RRate="rapprice",Price.ct="price"))
+importdata<-rename(importdata,c(Milky="Milky",Brownish="Brownish",Measurement="measurement",Shape="shape",Weight="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Flu="fluorescence",Lab="report",Cert.No="reportno",Item.No="stoneid", Dis...="back",RRate="rapprice",Price.ct="price"))
 #importdata<-rename(importdata,c(Milky="Milky",ColInt="ColInt",Shape="shape",Size="carat", Color="color", Clarity="clarity", Cut="cut", Polish="polish",Sym="symmetry",Flour="fluorescence",cert="report",ReportNo="reportno",Ref="stoneid", Disc="back",RapRate="rapprice",Rate="price"))
-importdata<-rename(importdata,c(Shape="shape",Size="carat", Color="color", Clarity="clarity", Cut="cut", Polish="polish",Sym="symmetry",Flour="fluorescence",cert="report",ReportNo="reportno",Ref="stoneid", Disc="back",RapRate="rapprice",Rate="price"))
+#importdata<-rename(importdata,c(Shape="shape",Size="carat", Color="color", Clarity="clarity", Cut="cut", Polish="polish",Sym="symmetry",Flour="fluorescence",cert="report",ReportNo="reportno",Ref="stoneid", Disc="back",RapRate="rapprice",Rate="price"))
 
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 ##########记得检查OPut<-cbind(OPut, measurement)
@@ -16,7 +16,7 @@ colsh<-rep(NA, length(importdata$shape))
 green<-rep(NA, length(importdata$shape))
 milky<-rep(NA, length(importdata$shape))
 rapnetid<-as.numeric(rep("43460", length(importdata$shape)))
-if(F){
+#if(F){
 temp1<-importdata$Milky%in%c("M-0","")
 milky[temp1]<-"无奶"
 temp2<-importdata$Milky%in%c("M-A","M-B")
@@ -32,7 +32,7 @@ temp5<-importdata$ColInt%in%c("WHT","")
 colsh[temp5]<-"无咖"
 green[temp5]<-"无绿"
 #}
-#if(F){
+if(F){
   
 temp1<-importdata$Brownish%in%c("Genuine Brown","Light Brown","Medium Brown","Slightly Brown  -  Not Problematic")
 colsh[temp1]<-"带咖"
@@ -53,12 +53,14 @@ OPut<-cbind(OPut, measurement)
 
 OPut<-cbind(OPut, green)
 OOPut<-cbind(OPut, importdata)
-if(F){
+
+#if(F){
 Myvars<-c("Milky","Brownish","shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
 Fin<-OOPut[Myvars]
 index_Fin<-Myvars%in%c("Milky","Brownish")
 Fin<-Fin[!index_Fin]
-}
+#}
+
 if(F){
   Myvars<-c("Milky","ColInt","shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
   Fin<-OOPut[Myvars]
@@ -66,6 +68,9 @@ if(F){
   Fin<-Fin[!index_Fin]
 }
 
-Myvars<-c("shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
-Fin<-OOPut[Myvars]
+if(F){
+  Myvars<-c("shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
+  Fin<-OOPut[Myvars]
+}
+
 write.csv(Fin,file="./R_input/43460.csv",row.names = F)

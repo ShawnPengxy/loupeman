@@ -1,8 +1,8 @@
 setwd("D:/")
 library(reshape)
 importdata<-`67155`
-#importdata<-rename(importdata,c(Milky="Milky",Brown="Brown",Tint="Tint¡±,Shape="shape",Carats="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Fluor="fluorescence",CERT="report",Certificate.No="reportno",STKID="stoneid", RapDis="back",RapRate="rapprice",Price.Per.Crt="price"))
-importdata<-rename(importdata,c(Tinge="Tinge",Lustre="Luster",Measurements="measurement",Shape="shape",Carats="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Fluor="fluorescence",Cert="report",Certificate.No="reportno",Packet.Id="stoneid", Rap.Dis="back",Rap.Rte="rapprice",X..Ct="price"))
+importdata<-rename(importdata,c(Milky="Milky",Brown="Brown",Tint="Tint", Shape="shape",Carats="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Fluor="fluorescence",CERT="report",Certificate.No="reportno",STKID="stoneid", RapDis="back",RapRate="rapprice",Price.Per.Crt="price"))
+#importdata<-rename(importdata,c(Tinge="Tinge",Lustre="Luster",Measurements="measurement",Shape="shape",Carats="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Fluor="fluorescence",Cert="report",Certificate.No="reportno",Packet.Id="stoneid", Rap.Dis="back",Rap.Rte="rapprice",X..Ct="price"))
 
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 #Dia<-c(unlist(paste(importdata$MinDia,importdata$MinDia, sep="-")))
