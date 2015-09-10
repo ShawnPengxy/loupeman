@@ -1,6 +1,6 @@
 shapefun<-function(sshape){###################每次都要检查shape项#########################
   sshape<-sub("\\b[Oo](\\w*[Ll]|[Mm]?[Bb])\\b|\\b[Oo][Vv]\\w*","椭",sshape)
-  sshape<-sub("\\b[Rr](\\w*[Dd]|[Mm]?[Bb][Cc]?)\\b|\\bRO\\w*","圆形",sshape)
+  sshape<-sub("\\b[Rr](\\w*[Dd]|[Mm]?[Bb][Cc]?)\\b|\\bRO\\w*|\\bBR.*","圆形",sshape,ignore.case=T)
   sshape<-sub("\\b[Cc](\\w*[Nn]|[Mm]?[Bb])\\b|\\bCU\\w*|\\b[Cc][Uu]?[Ss]?[Hh]\\w*","垫形",sshape)
   sshape<-sub("\\b[Pp]\\w*[Ss]\\b|\\bPR\\w*|\\b[Pp][Cc]\\b|\\b[Pp][Nn]\\b","公主方",sshape)
   sshape<-sub("\\b[Mm](\\w*[Ee]|[Mm]?[Bb])\\b|\\bMA\\w*|\\b[Cc][Mm]\\b|\\b[Mm][Qq]\\b|^[Mm]$","马眼形",sshape)
@@ -55,7 +55,8 @@ importdata$reportno[temp_repno]<-""
 temp_repno<-importdata$price%in%NA
 importdata$price[temp_repno]<-""
 
-############rapprice和back先不设置为NA########
+############stoneid、rapprice和back先不设置为NA########
+importdata$stoneid[is.na(importdata$stoneid)]<-""
 importdata$rapprice[is.na(importdata$rapprice)]<-""
 importdata$back[is.na(importdata$back)]<-""
 
@@ -84,7 +85,7 @@ Shhapee<-matchh("三角形",Shhapee, 2)
 Shhapee<-matchh("方形",Shhapee, 1)
 Shhapee<-matchh("上丁",Shhapee, 3)
 temp<-Shhapee%in%c("圆形","垫形","公主方","马眼形","心形","祖母绿","梨形","椭","雷迪恩","三角形","方形","上丁")
-#Shhapee[!temp]<-NA
+Shhapee[!temp]<-NA
 ########字段还原#######
 temp_1<-Shhapee%in%"椭"
 Shhapee[temp_1]<-"椭圆形"
@@ -93,7 +94,7 @@ Shhapee[temp_2]<-"上丁方形"
 newdata$shape<-Shhapee
 ############clarity######################
 cclarity<-newdata$clarity
-cclarity<-sub(pattern = "\\b([Ff][Ll]).*", replacement = "FL", cclarity)
+cclarity<-sub(pattern = "\\b([Ff][Ll]).*|INTERNALLYFLAWLESS", replacement = "FL", cclarity)
 cclarity<-sub(pattern = "\\b([Ii][Ff]).*", replacement = "IF", cclarity)
 cclarity<-sub(pattern = "\\b([Vv][Vv][Ss]\\s?1).*", replacement = "VVS1", cclarity)
 cclarity<-sub(pattern = "\\b([Vv][Vv][Ss]\\s?2).*", replacement = "VVS2", cclarity)
@@ -113,12 +114,13 @@ newdata$clarity<-cclarity
 newdata$cut[which(newdata$shape!="圆形")]<-""###########异形钻没有切工
 ccut<-newdata$cut
 ccut<-sub(pattern = ".*[Ee][Xx].*", replacement = "EX", ccut)
-ccut<-sub(pattern = ".*[Ff][Rr].*", replacement = "FR", ccut)
+ccut<-sub(pattern = ".*[Ff][Rr]?.*", replacement = "FR", ccut)
 ccut<-sub(pattern = "\\b[Gg][Dd]?.*", replacement = "GD", ccut)
 ccut<-sub(pattern = ".*[Vv][Gg].*", replacement = "VG", ccut)
 ccut<-sub(pattern = "\\b[Pp].*", replacement = "PR", ccut)
+ccut<-sub(pattern = "-|*\\*\\|NON", replacement = "", ccut)
 temp_cut<-ccut%in%c("EX","FR","GD","VG","PR","")
-ccut[!temp_cut]<-NA
+ccut[!temp_cut]<-""
 newdata$cut<-ccut
 ###############ppolish###################
 ppolish<-newdata$polish
@@ -142,12 +144,12 @@ ssymmetry[!temp_symm]<-NA
 newdata$symmetry<-ssymmetry
 ###############fluorescence###################
 ffluorescence<-newdata$fluorescence
-ffluorescence<-sub(pattern = "\\b[Ff].*", replacement = "F", ffluorescence)
-ffluorescence<-sub(pattern = "\\b[Mm].*", replacement = "M", ffluorescence)
-ffluorescence<-sub(pattern = "\\b[Nn].*", replacement = "N", ffluorescence)
-ffluorescence<-sub(pattern = "\\b[Ss].*", replacement = "S", ffluorescence)
-ffluorescence<-sub(pattern = "\\b[Vv][Ss]([^Ll].*|\\s*\\b)", replacement = "VS", ffluorescence)
-ffluorescence<-sub(pattern = "\\b[Vv][Ss][Ll].*", replacement = "VSL", ffluorescence)
+ffluorescence<-sub(pattern = "\\b\\s?[Ff].*", replacement = "F", ffluorescence)
+ffluorescence<-sub(pattern = "\\b\\s?[Mm].*", replacement = "M", ffluorescence)
+ffluorescence<-sub(pattern = "\\b\\s?[Nn].*", replacement = "N", ffluorescence)
+ffluorescence<-sub(pattern = "\\b\\s?[Ss].*", replacement = "S", ffluorescence)
+ffluorescence<-sub(pattern = "\\b\\s?[Vv].*[Ss]([^Ll].*|\\s*\\b)", replacement = "VS", ffluorescence)
+ffluorescence<-sub(pattern = "\\b\\s?[Vv][Ss][Ll].*", replacement = "VSL", ffluorescence)
 
 temp_fluo<-ffluorescence%in%c("F","M","N","S","VS","VSL")
 ffluorescence[!temp_fluo]<-NA
@@ -159,20 +161,28 @@ rreport<-sub(pattern = ".*HRD.*", replacement = "HRD", rreport)
 rreport<-sub(pattern = ".*IGI.*", replacement = "IGI", rreport)
 rreport<-sub(pattern = ".*NGTC.*", replacement = "NGTC", rreport)
 rreport<-sub(pattern = ".*AGS.*", replacement = "AGS", rreport)
+rreport<-sub(pattern = ".*EGL.*", replacement = "EGL", rreport)
 rreport<-sub(pattern = ".*CGL.*", replacement = "CGL", rreport)
+rreport<-sub(pattern = ".*JGS.*", replacement = "JGS", rreport)
+rreport<-sub(pattern = ".*SGS.*", replacement = "SGS", rreport)
+rreport<-sub(pattern = ".*CCGTC.*", replacement = "CCGTC", rreport)
+rreport<-sub(pattern = ".*FM.*", replacement = "FM", rreport)
 
-temp_rep<-rreport%in%c("GIA","HRD","IGI","NGTC","EGL","AGS","CGL","CCGTC","散货")
+
+temp_rep<-rreport%in%c("GIA","HRD","IGI","NGTC","EGL","AGS","CGL","CCGTC","散货","EGL","JGS","SGS","FM")
 rreport[!temp_rep]<-"散货"
 newdata$report<-rreport
 
 ##################删除stoneid中的中文字“日”和“月"##############
-newdata$stoneid<-gsub(pattern = ".*[日月/].*", replacement = NA, newdata$stoneid)
+#newdata$stoneid<-gsub(pattern = ".*[日月/].*", replacement = NA, newdata$stoneid)
 ######################删除milky中的L1和L2项############
 newdata$milky[newdata$milky%in%c("L1","L2")]<-"无奶"
 ######################删除carat中小于0.3的异常值#################
 #newdata$carat[which(newdata$carat<0.3)]<-NA
 ##################删除散货#########################
 newdata$report[which(newdata$report=="散货")]<-NA
+##################删除无证书编号#########################
+newdata$reportno[which(newdata$reportno=="")]<-NA
 ################去除价格中逗号分割################
 newdata$rapprice<-gsub(",","",newdata$rapprice)
 newdata$price<-gsub(",","",newdata$price)
@@ -296,8 +306,8 @@ Fancycolor_data<-subset(Fancy_data,is.na(strength)==F,select=shape:hue)
 ##################处理白钻颜色######################
 coolor[!temp_colorr]<-NA
 
-temp_minusN<-coolor%in%c("N","O","P","Q","S","U","W","X","Y","O-P","Q-R","S-T","U-V","W-X","X-Y","Y-Z")
-coolor[temp_minusN]<-NA
+#temp_minusN<-coolor%in%c("N","O","P","Q","S","U","W","X","Y","O-P","Q-R","S-T","U-V","W-X","X-Y","Y-Z")
+#coolor[temp_minusN]<-NA
 newdata$color<-coolor
 #################
 
@@ -319,12 +329,13 @@ Fancycolor_data<-subset(Fancycolor_data,Fancycolor_data$price!=""&!is.na(Fancyco
 
 ######################删除rapprice中小于10的异常值#################
 newdata$rapprice[which(newdata$rapprice<10)]<-NA
-###################删除back大于等于0的值##################
+###################删除back大于等于0的值和空白值##################
 newdata$back[which(newdata$back>=0)]<-NA
+newdata$back[which(newdata$back=="")]<-NA
 
 ##########输出白钻数据###########
 ##################删除stoneid中的中文字“日”和“月"##############
-newdata$stoneid<-gsub(pattern = ".*[日月/].*", replacement = NA, newdata$stoneid)
+newdata$stoneid<-gsub(pattern = ".*[日月].*|\\b\\d{4}[-/]\\d{4}.*", replacement ="", newdata$stoneid)
 TTT<-newdata[-19]#################删除price项目#############
 TTT<-na.omit(TTT)
 TTT$cut[which(TTT$shape!="圆形")]<-""##################把异形钻的切工项改为无切工

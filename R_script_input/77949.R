@@ -1,9 +1,10 @@
 library(reshape)
 importdata<-`77949` #导入变量名转换
-importdata<-rename(importdata,c(BGM="BGM",Measurements="measurement",Shape="shape",Weight="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Flour.="fluorescence",LAB="report",Certifcate="reportno",STONEID="stoneid", Disc..="back",Rap="rapprice"))
+#importdata<-rename(importdata,c(BGM="BGM",Measurements="measurement",Shape="shape",Weight="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Flour.="fluorescence",LAB="report",Certifcate="reportno",STONEID="stoneid", Disc..="back",Rap="rapprice"))
+importdata<-rename(importdata,c(L...W...H="measurement",Shape="shape",Cts="carat", Col="color", Clrt="clarity", Cut="cut", Pol="polish",Sym="symmetry",Flr="fluorescence",Cert="report",Cert.="reportno",Ref.="stoneid", Disc="back",RAP="rapprice"))
 
 importdata$shape[which(importdata$shape=="RBC")]<-"圆形"
-importdata$back<-gsub("%","",importdata$back)
+importdata$back<-as.numeric(gsub("\\*","",importdata$back))
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 
 rapnetid<-rep("77949", length(importdata$measurement))

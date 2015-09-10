@@ -5,7 +5,7 @@ importdata<-rename(importdata, c(Lus="Lus",CertNo="CertNo",Measurement="measurem
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 
 
-rapnetid<-rep("00000", length(importdata$measurement))
+rapnetid<-rep(00000, length(importdata$measurement))
 milky<-rep(NA, length(importdata$measurement))
 colsh<-rep(NA, length(importdata$measurement))
 green<-rep(NA, length(importdata$measurement))

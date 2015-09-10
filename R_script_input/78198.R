@@ -1,6 +1,6 @@
 library(reshape)
 importdata<-`78198` #导入变量名转换
-importdata<-rename(importdata, c(Measurements="measurement",Shape="shape",Weight="carat", Color="color",Clarity="clarity",Cut.Grade="cut", Polish="polish", Symmetry="symmetry", Fluorescence.Intensity="fluorescence",Lab="report", Certificate..="reportno", Stock..="stoneid", Rapnet.Discount..="back", Rapnet.Price="rapprice"))
+importdata<-rename(importdata, c(Measurements="measurement",Shape="shape",Weight="carat", Color="color",Clarity="clarity",Cut.Grade="cut", Polish="polish", Symmetry="symmetry", Fluorescence.Intensity="fluorescence",Lab="report", Certificate..="reportno", Stock..="stoneid", Rapnet.Discount..="back", Rap="rapprice"))
 importdata$back<-as.numeric(gsub("%","",importdata$back))
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 

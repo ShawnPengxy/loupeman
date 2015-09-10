@@ -1,6 +1,6 @@
 library(reshape)
 importdata<-`68862india` #导入变量名转换
-importdata<-rename(importdata, c(Shade="Shade",Shape="shape",Carat="carat", Col="color",Clarity="clarity",Cut="cut", Pol="polish", Sym="symmetry", Fls="fluorescence",Lab="report", Report.No="reportno", Packet.No="stoneid", Disc..="back", Rap....="rapprice"))
+importdata<-rename(importdata, c(Shade="Shade",Shape="shape",Carat="carat", Color="color",Clarity="clarity",Cut="cut", Pol="polish", Sym="symmetry", Flou.="fluorescence",Lab="report", Report.No="reportno", Packet.No="stoneid", Disc..="back", Rapaport="rapprice"))
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 
 measurement<-paste(importdata$Length,importdata$Width,importdata$Depth,sep="*")
