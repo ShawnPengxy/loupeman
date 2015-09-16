@@ -1,7 +1,7 @@
 library(reshape)
 importdata<-`74753` #导入变量名转换
-importdata<-rename(importdata, c(MILKY="MILKY",TINGE="TINGE",MSRSMNT="measurement",Shape="shape",Weight="carat", Color="color",Clarity="clarity",Cut.Grade="cut", Polish="polish", Symmetry="symmetry", Fluorescence.Intensity="fluorescence",Lab="report", Certificate..="reportno", Stock..="stoneid", RAP.="back", Rap.Price="rapprice",price.cts="price"))
-#importdata<-rename(importdata, c(奶色="奶色",绿咖="绿咖",尺寸="measurement",形状="shape",重量="carat", 颜色="color",净度="clarity",切工="cut", 抛光="polish", 对称="symmetry", 荧光="fluorescence",证书="report", 证书编码="reportno", 编码="stoneid", 折扣="back", 国际价格="rapprice",总价="price"))
+#importdata<-rename(importdata, c(MILKY="MILKY",TINGE="TINGE",MSRSMNT="measurement",Shape="shape",Weight="carat", Color="color",Clarity="clarity",Cut.Grade="cut", Polish="polish", Symmetry="symmetry", Fluorescence.Intensity="fluorescence",Lab="report", Certificate..="reportno", Stock..="stoneid", RAP.="back", Rap.Price="rapprice",price.cts="price"))
+importdata<-rename(importdata, c(奶色="奶色",绿咖="绿咖",尺寸="measurement",形状="shape",重量="carat", 颜色="color",净度="clarity",切工="cut", 抛光="polish", 对称="symmetry", 荧光="fluorescence",证书="report", 证书编码="reportno", 编码="stoneid", 折扣="back", 国际价格="rapprice",总价="price"))
 
 importdata$back<-as.numeric(gsub("%","",importdata$back))
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back<--importdata$back
@@ -11,7 +11,7 @@ colsh<-rep(NA, length(importdata$shape))
 green<-rep(NA, length(importdata$shape))
 milky<-rep(NA, length(importdata$shape))
 
-#if(F){
+if(F){
   
   milk1<-importdata$MILKY%in%c("N","","-")
   milky[milk1]<-"无奶"
@@ -27,14 +27,14 @@ milky<-rep(NA, length(importdata$shape))
   temp3<-importdata$TINGE%in%c("DG", "G", "LG", "MG", "VLG")
   green[temp3]<-"带绿"
   colsh[temp3]<-"无咖"
-#}
+}
 
 importdata$shape[which(importdata$shape=="马眼")]<-"马眼形"
 importdata$shape[which(importdata$shape=="祖母绿形")]<-"祖母绿"
 importdata$shape[which(importdata$shape=="方形")]<-"公主方"
 importdata$shape[which(importdata$shape=="水滴")]<-"梨形"
 
-if(F){
+#if(F){
 milk1<-importdata$奶色%in%c("N","","-")
 milky[milk1]<-"无奶"
 milk2<-importdata$奶色%in%c("M1","M2","M3","M4")
@@ -48,7 +48,7 @@ colsh[temp2]<-"带咖"
 temp3<-importdata$绿咖%in%c("DG", "G", "LG", "MG", "VLG")
 green[temp3]<-"带绿"
 colsh[temp3]<-"无咖"
-}
+#}
 
 OPut<-cbind(rapnetid, colsh)
 OPut<-cbind(OPut, milky)
@@ -58,18 +58,18 @@ OPut<-cbind(OPut, green)
 OOPut<-cbind(OPut, importdata)
 
 
-#if(F){
+if(F){
   Myvars<-c("MILKY","TINGE","shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
   Fin<-OOPut[Myvars]
   index_Fin<-Myvars%in%c("MILKY","TINGE")
   Fin<-Fin[!index_Fin]
-#}
-if(F){
+}
+#if(F){
   Myvars<-c("奶色","绿咖","shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
   Fin<-OOPut[Myvars]
   index_Fin<-Myvars%in%c("奶色","绿咖")
   Fin<-Fin[!index_Fin]
-}
+#}
 
 
 write.csv(Fin,file="./R_input/74753.csv",row.names = F)

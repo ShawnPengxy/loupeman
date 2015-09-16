@@ -3,13 +3,13 @@ library(reshape)
 importdata<-`43460`
 importdata<-rename(importdata,c(Milky="Milky",Brownish="Brownish",Measurement="measurement",Shape="shape",Weight="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Flu="fluorescence",Lab="report",Cert.No="reportno",Item.No="stoneid", Dis...="back",RRate="rapprice",Price.ct="price"))
 #importdata<-rename(importdata,c(Milky="Milky",ColInt="ColInt",Shape="shape",Size="carat", Color="color", Clarity="clarity", Cut="cut", Polish="polish",Sym="symmetry",Flour="fluorescence",cert="report",ReportNo="reportno",Ref="stoneid", Disc="back",RapRate="rapprice",Rate="price"))
-#importdata<-rename(importdata,c(Shape="shape",Size="carat", Color="color", Clarity="clarity", Cut="cut", Polish="polish",Sym="symmetry",Flour="fluorescence",cert="report",ReportNo="reportno",Ref="stoneid", Disc="back",RapRate="rapprice",Rate="price"))
+#importdata<-rename(importdata,c(Shape="shape",Weight="carat", Color="color", Purity="clarity", Cut="cut", Polish="polish",Symn="symmetry",Fluor="fluorescence",Cert="report",ReportNo="reportno",RefNo="stoneid", Per="back",RRate="rapprice",Total="price"))
 
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 ##########¼ÇµÃ¼ì²éOPut<-cbind(OPut, measurement)
 
-#measurement<-c(unlist(paste(importdata$Mes1, importdata$Mes2, importdata$Mes3, sep="*")))
-measurement<-c(unlist(paste(importdata$M1, importdata$M2, importdata$M3, sep="*")))
+measurement<-c(unlist(paste(importdata$Mes1, importdata$Mes2, importdata$Mes3, sep="*")))
+#measurement<-c(unlist(paste(importdata$M1, importdata$M2, importdata$M3, sep="*")))
 #measurement<-c(unlist(paste(importdata$Length, importdata$Width, importdata$Depth, sep="*")))
 
 colsh<-rep(NA, length(importdata$shape))

@@ -1,7 +1,7 @@
 library(reshape)
 importdata<-`77949` #导入变量名转换
-#importdata<-rename(importdata,c(BGM="BGM",Measurements="measurement",Shape="shape",Weight="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Flour.="fluorescence",LAB="report",Certifcate="reportno",STONEID="stoneid", Disc..="back",Rap="rapprice"))
-importdata<-rename(importdata,c(L...W...H="measurement",Shape="shape",Cts="carat", Col="color", Clrt="clarity", Cut="cut", Pol="polish",Sym="symmetry",Flr="fluorescence",Cert="report",Cert.="reportno",Ref.="stoneid", Disc="back",RAP="rapprice"))
+importdata<-rename(importdata,c(BGM="BGM",Measurements="measurement",Shape="shape",Weight="carat", Color="color", Clarity="clarity", Cut="cut", Pol="polish",Sym="symmetry",Flour.="fluorescence",LAB="report",Certifcate="reportno",STONEID="stoneid", Disc..="back",Rap="rapprice"))
+#importdata<-rename(importdata,c(L...W...H="measurement",Shape="shape",Cts="carat", Col="color", Clrt="clarity", Cut="cut", Pol="polish",Sym="symmetry",Flr="fluorescence",Cert="report",Cert.="reportno",Ref.="stoneid", Disc="back",RAP="rapprice"))
 
 importdata$shape[which(importdata$shape=="RBC")]<-"圆形"
 importdata$back<-as.numeric(gsub("\\*","",importdata$back))
@@ -41,6 +41,8 @@ OPut<-cbind(OPut, milky)
 OPut<-cbind(OPut, green)
 OPut<-cbind(OPut, price)
 OOPut<-cbind(OPut, importdata)
-Myvars<-c("shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
+Myvars<-c("BGM","shape","carat","color","clarity","cut","polish","symmetry","fluorescence","colsh","milky","green","measurement","report","reportno","rapnetid","stoneid","back","rapprice","price")
 Fin<-OOPut[Myvars]
+index_Fin<-Myvars%in%c("BGM")
+Fin<-Fin[!index_Fin]
 write.csv(Fin,file="./R_input/77949.csv",row.names = F)

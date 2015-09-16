@@ -329,6 +329,7 @@ Fancycolor_data<-subset(Fancycolor_data,Fancycolor_data$price!=""&!is.na(Fancyco
 
 ######################删除rapprice中小于10的异常值#################
 newdata$rapprice[which(newdata$rapprice<10)]<-NA
+newdata$back[which(newdata$back=="")]<-NA
 ###################删除back大于等于0的值和空白值##################
 newdata$back[which(newdata$back>=0)]<-NA
 newdata$back[which(newdata$back=="")]<-NA

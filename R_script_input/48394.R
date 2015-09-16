@@ -1,6 +1,6 @@
 library(reshape)
 importdata<-`48394` #导入变量名转换
-importdata<-rename(importdata, c(Tinge="Tinge",Milky="Milky",Measurement="measurement",Shape="shape",Carats="carat", Color="color",Clarity="clarity",Cut="cut", Polish="polish", Symm="symmetry", Fluo.Int="fluorescence",Lab="report", Certificate="reportno", Stone.ID="stoneid", Disc..="back", Rap..="rapprice",Amount.U.="price"))
+importdata<-rename(importdata, c(Tinge="Tinge",Milky="Milky",Measurement="measurement",Shape="shape",Carats="carat", Color="color",Clarity="clarity",Cut="cut", Polish="polish", Symm="symmetry", Fluo.Int="fluorescence",Lab="report", Certificate="reportno", Stone.ID="stoneid", Disc...="back", Rap..="rapprice",Amount.US.="price"))
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 
 rapnetid<-as.numeric(rep("48394", length(importdata$measurement)))

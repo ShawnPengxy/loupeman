@@ -1,7 +1,7 @@
 library(reshape)
 importdata<-`81517` #导入变量名转换
 #importdata<-rename(importdata, c(BMG.COMMNET="BMG.COMMNET",DIAMETER="measurement",SH="shape",CT.="carat", COL="color",CLT="clarity",CUT="cut", PO="polish", SYM="symmetry", FLO="fluorescence",Lab="report", CERTIFICTE="reportno", M.ID="stoneid",FINAL="back",NEW.RAP="rapprice"))
-importdata<-rename(importdata, c(DIAMETER="measurement",SH="shape",CT.="carat", COL="color",CLT="clarity",CUT="cut", PO="polish", SYM="symmetry", FLO="fluorescence",Lab="report", CERTIFICTE="reportno", M.ID="stoneid",R.P="back",NEW.RAP="rapprice"))
+importdata<-rename(importdata, c(DIAMETER="measurement",SH="shape",CT.="carat", COL="color",CLT="clarity",CUT="cut", PO="polish", SYM="symmetry", FLO="fluorescence",Lab="report", CERTIFICTE="reportno", M.ID="stoneid",Dis.="back",NEW.RAP="rapprice"))
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back
 rapnetid<-rep(81517, length(importdata$measurement))
 

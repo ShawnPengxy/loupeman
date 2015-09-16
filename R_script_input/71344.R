@@ -1,7 +1,7 @@
 setwd("D:/")
 library(reshape)
 importdata<-`71344`
-importdata<-rename(importdata,c(COM="COM",SHP="shape",CTS="carat", COL="color", CLA="clarity", CUT="cut", POL="polish",SYM="symmetry",FL="fluorescence",CERTNO.="reportno",REFNO.="stoneid", DIS="back",RAP="rapprice"))
+importdata<-rename(importdata,c(COM="COM",SHP="shape",CTS="carat", COL="color", CLA="clarity", CUT="cut", POL="polish",SYM="symmetry",FL="fluorescence",CERTNO.="reportno",REFNO.="stoneid", DIS="back",Rap="rapprice"))
 #importdata<-rename(importdata,c(COM="COM",SHP="shape",CTS="carat", COL="color", CLA="clarity", CUT="cut", POL="polish",SYM="symmetry",FL="fluorescence",CERTNO.="reportno",REFNO.="stoneid", Dis="back",rap="rapprice"))
 
 if(length(which(importdata$back>0))>length(which(importdata$back<0))) importdata$back=-importdata$back

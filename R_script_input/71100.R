@@ -19,7 +19,7 @@ last_number<-length(measurement)
 colsh<-rep(NA, length(measurement))
 milky<-rep(NA, length(measurement))
 green<-rep(NA, length(measurement))
-
+#if(F){
 zongse<-regexpr("BROWN", ziduan)
 lvse<-regexpr("GREEN", ziduan)
 naise<-regexpr("MILKY", ziduan)
@@ -41,7 +41,7 @@ green[index1]<-"无绿"
 milky[which(is.na(milky)&!is.na(colsh)|!is.na(green))]<-"无奶"
 colsh[which(is.na(colsh)&!is.na(milky)|!is.na(green))]<-"无咖"
 green[which(is.na(green)&!is.na(colsh)|!is.na(milky))]<-"无绿"
-
+#}
 OPut<-cbind(measurement,rapnetid)
 OPut<-cbind(OPut, colsh)
 OPut<-cbind(OPut, milky)
