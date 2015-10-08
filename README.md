@@ -1,2 +1,4 @@
-# loupeman
-data cleanning on everyday stock lists
+# 白钻每日库存数据更新
+
+
+1.
